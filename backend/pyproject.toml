@@ -1,0 +1,23 @@
+[project]
+name = "gcp-helper-backend"
+version = "0.1.0"
+description = "FastAPI backend for managing per-environment gcloud auth/config flows."
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard]==0.115.6",
+    "uvicorn[standard]==0.34.0",
+    "pydantic==2.10.4",
+    "pydantic-settings==2.7.1",
+    "SQLAlchemy==2.0.36",
+    "alembic==1.14.0",
+    "psycopg2-binary==2.9.10",
+    "pexpect==4.9.0",
+    "python-multipart==0.0.20",
+    "cryptography==44.0.0",
+]
+
+[dependency-groups]
+dev = []
+
+[tool.uv]
+package = false

@@ -1,0 +1,50 @@
+services:
+  data-init:
+    image: gcp-helper-backend:local
+    user: "0:0"
+    command:
+      - sh
+      - -c
+      - mkdir -p /app/data/gcloud-envs /app/data/logs /app/data/channel-templates && chown -R 10001:10001 /app/data
+    restart: "no"
+    network_mode: none
+    volumes:
+      - ${GCP_HELPER_DATA_DIR:-./deploy/data}:/app/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: gcp-helper-backend:local
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env.production
+    depends_on:
+      data-init:
+        condition: service_completed_successfully
+    volumes:
+      - ${GCP_HELPER_DATA_DIR:-./deploy/data}:/app/data
+    expose:
+      - "8000"
+    networks:
+      - gcp-helper
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE: /api
+    image: gcp-helper-frontend:local
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${GCP_HELPER_PORT:-8080}:80"
+    networks:
+      - gcp-helper
+
+networks:
+  gcp-helper:
+    driver: bridge

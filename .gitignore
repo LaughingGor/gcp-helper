@@ -1,0 +1,68 @@
+# 本地环境配置；配置示例应提交
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Python 依赖、缓存与检查产物
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Node / Vite / TypeScript（保留 package-lock.json 和 uv.lock）
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 运行数据、gcloud 授权与部署备份
+/data/
+/backend/data/
+/deploy/data/
+/deploy/backups/
+.gcloud/
+.config/gcloud/
+gcloud-envs/
+credentials/
+application_default_credentials.json
+
+# 数据库与日志（包含 SQLite WAL / SHM / journal 文件）
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.log
+*.log.*
+
+# 私钥与常见 Service Account 密钥文件；不忽略所有 JSON
+*.key
+*.pem
+*.p12
+*.pfx
+service-account*.json
+service_account*.json
+
+# 操作系统与编辑器本地文件
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~

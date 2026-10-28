@@ -1,0 +1,9 @@
+.venv
+data
+tests
+__pycache__
+*.py[cod]
+.env
+.env.production
+.pytest_cache
+.mypy_cache
